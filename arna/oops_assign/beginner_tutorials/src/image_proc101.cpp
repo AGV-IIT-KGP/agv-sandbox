@@ -42,7 +42,7 @@ cv::Mat game_binary(cv::Mat img){
 int i,j;	
 for(i=0;i<img.rows;i++){
    for(j=0;j<img.cols;j++){
-       if( img.at<cv::Vec3b>(i, j)[0]==255 || img.at<cv::Vec3b>(i, j)[1] == 255|| img.at<cv::Vec3b>(i, j)[2] == 255)
+       if( img.at<cv::Vec3b>(i, j)[0]>=235 || img.at<cv::Vec3b>(i, j)[1] >= 235|| img.at<cv::Vec3b>(i, j)[2] >= 235)
        		bin.at<uchar>(i, j) = 255;
        	else bin.at<uchar>(i, j) = 0;
    }
@@ -51,19 +51,13 @@ for(i=0;i<img.rows;i++){
 return bin;
 }
 
-cv::Mat qblobdetect(cv::Mat bin,int* mark,int** A){
-	 std::cout<<"hello";
+cv::Mat qblobdetect(cv::Mat& bin,int* mark,int** A){
+	 //std::cout<<"hello";
 	 int i,j,x,y,wd=bin.cols,ht=bin.rows,max_pix_count=0,max_size_index=0;
-	 A=new int*[bin.rows];
-	 for(i=0;i<bin.rows;i++)A[i]=new int[bin.cols];
+	 
 	 for(i=0;i<ht;i++){
 		 for(j=0;j<wd;j++){
-			 A[i][j]=-1;
-		 }}
-
-	 for(i=0;i<ht;i++){
-		 for(j=0;j<wd;j++){
-			 if(bin.at<uchar>(i,j)==0){
+			 if(bin.at<uchar>(i,j)==255){
 				 if(A[i][j]==-1){
 					 *mark=*mark+1;
 				 enqueue(i,j);
@@ -75,13 +69,13 @@ cv::Mat qblobdetect(cv::Mat bin,int* mark,int** A){
 				 dequeue();
 				 for(k=x-1;k<=x+1;k++){
 					 for(l=y-1;l<=y+1;l++){
-						 if((k<ht)&&(l<wd)&&(k>=0)&&(l>=0)&&(A[k][l]==-1) && bin.at<uchar>(k,l)==0){
+						 if((k<ht)&&(l<wd)&&(k>=0)&&(l>=0)&&(A[k][l]==-1) && bin.at<uchar>(k,l)==255){
 							 enqueue(k,l);
 							 A[k][l]=*mark;}
 					 }}
 				 A[x][y]=*mark;
 				}
-				 }
+			std::cout<<*mark<<" "<<x<<","<<y<<std::endl;	 }
 			 }
 		 }}
 
@@ -95,21 +89,23 @@ cv::Mat qblobdetect(cv::Mat bin,int* mark,int** A){
 			 //if(A[i][j]!=-1)a[A[i][j]]++;
 				 //IMGDATA(qblobdetect,i,j,0)=IMGDATA(qblobdetect,i,j,1)=IMGDATA(qblobdetect,i,j,2)=255;
 			 //else{
-			 
-				 qblob.at<cv::Vec3b>(i,j)[0]=255*sin(A[i][j]);
+			 if(A[i][j]==-1)qblob.at<cv::Vec3b>(i,j)[0]=qblob.at<cv::Vec3b>(i,j)[1]=qblob.at<cv::Vec3b>(i,j)[2]=255;
+			else{	 
+			 qblob.at<cv::Vec3b>(i,j)[0]=255*sin(A[i][j]);
 			 qblob.at<cv::Vec3b>(i,j)[1]=255*cos(A[i][j]);
 			 qblob.at<cv::Vec3b>(i,j)[2]=255*(sin(A[i][j])+cos(A[i][j]))/1.5; 
-			 if(A[i][j]==-1)qblob.at<cv::Vec3b>(i,j)[0]=qblob.at<cv::Vec3b>(i,j)[1]=qblob.at<cv::Vec3b>(i,j)[2]=255;
+			 }
 			 }}
-	 //count_x=(double*)malloc((*mark+1)*sizeof(double));
-	 //count_y=(double*)malloc((*mark+1)*sizeof(double));
+	 
 	//centroid(bin,A,*mark,count_x,count_y); 
 	 return qblob;
 }
 
 
+
+
 int main(){
-cv::Mat img=cv::imread("/home/arnatubai/Desktop/beyblade.jpg",CV_LOAD_IMAGE_COLOR);
+cv::Mat img=cv::imread("/home/arnatubai/Desktop/circles.jpg",CV_LOAD_IMAGE_COLOR);
 cv::namedWindow("C",CV_WINDOW_AUTOSIZE);
 cv::imshow("C",img);
 cv::waitKey(0);
@@ -124,10 +120,18 @@ cv::waitKey(0);
 std::cout<<bin.rows<<","<<bin.cols<<std::endl;
 
 int** A,mark=0;
-
+A=new int*[bin.rows];
+	 for(int i=0;i<bin.rows;i++)A[i]=new int[bin.cols];	
+	 for(int i=0;i<bin.rows;i++){
+		 for(int j=0;j<bin.cols;j++){
+			 A[i][j]=-1;
+		 }}
 cv::Mat qblob=qblobdetect(bin,&mark,A);
 
-std::cout<<mark<<" "<<A[10][10]<<std::endl;
+std::cout<<mark<<" "<<A[100][125]<<std::endl;
 cv::imshow("C",qblob);
+count_x=new int[count];
+count_y=new int[count];
+centroid()
 cvWaitKey(0);
 }
