@@ -1,0 +1,71 @@
+# depslib dependency file v1.0
+1394618834 source:c:\users\abinash\skydrive\documents\code chef\new folder\oops ps\main.cpp
+	<iostream>
+	<ctime>
+	<cstdlib>
+	"Position.h"
+	"Board.h"
+	"Player.h"
+	"Image.h"
+	"Dice.h"
+	"Game.h"
+	"Dice6.h"
+
+1394456855 c:\users\abinash\skydrive\documents\code chef\new folder\oops ps\position.h
+
+1394456844 source:c:\users\abinash\skydrive\documents\code chef\new folder\oops ps\position.cpp
+	"Position.h"
+
+1394456386 source:c:\users\abinash\skydrive\documents\code chef\new folder\oops ps\src\position.cpp
+	"Position.h"
+
+1394456386 c:\users\abinash\skydrive\documents\code chef\new folder\oops ps\src\position.h
+
+1394562841 source:c:\users\abinash\skydrive\documents\code chef\new folder\oops ps\board.cpp
+	"Board.h"
+	<cstdlib>
+	<ctime>
+
+1394558684 c:\users\abinash\skydrive\documents\code chef\new folder\oops ps\board.h
+	"Position.h"
+	"Image.h"
+
+1394556573 c:\users\abinash\skydrive\documents\code chef\new folder\oops ps\image.h
+
+1394518589 source:c:\users\abinash\skydrive\documents\code chef\new folder\oops ps\dice.cpp
+	"Dice.h"
+	<ctime>
+	<cstdlib>
+
+1394518570 c:\users\abinash\skydrive\documents\code chef\new folder\oops ps\dice.h
+
+1394560446 source:c:\users\abinash\skydrive\documents\code chef\new folder\oops ps\dice6.cpp
+	"Dice6.h"
+	<ctime>
+	<cstdlib>
+
+1394476911 c:\users\abinash\skydrive\documents\code chef\new folder\oops ps\dice6.h
+	"Dice.h"
+
+1394619055 source:c:\users\abinash\skydrive\documents\code chef\new folder\oops ps\game.cpp
+	"Game.h"
+	<conio.h>
+
+1394618834 c:\users\abinash\skydrive\documents\code chef\new folder\oops ps\game.h
+	"Player.h"
+	"Dice6.h"
+	"Board.h"
+	"Dice.h"
+
+1394619179 c:\users\abinash\skydrive\documents\code chef\new folder\oops ps\player.h
+	"Position.h"
+	"Board.h"
+	<iostream>
+	<cmath>
+
+1394556587 source:c:\users\abinash\skydrive\documents\code chef\new folder\oops ps\image.cpp
+	"Image.h"
+
+1394619758 source:c:\users\abinash\skydrive\documents\code chef\new folder\oops ps\player.cpp
+	"Player.h"
+
