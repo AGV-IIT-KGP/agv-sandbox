@@ -5,10 +5,10 @@ using namespace std;
 
 class game: public pt{
 public:
-int score;
+int winner_score,winner_id;
 game(int a,int b): pt(a, b){
 	x=a;y=b;
-score=0;
+winner_score=0;winner_id=0;
 };
 };
 
