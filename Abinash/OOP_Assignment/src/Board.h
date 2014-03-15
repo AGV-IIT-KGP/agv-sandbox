@@ -3,10 +3,10 @@
 #include "Position.h"
 #include "Image.h"
 
-typedef struct{
+struct pix{
    char c;
    Position p;
-}pix;
+};
 
 struct Chan{
    Position r[100];int rn;

@@ -5,8 +5,11 @@
 class Position
 {
    public:
-      int x,y;
+      int x;
+      int y;
       Position();
+   protected:
+   private:
 };
 
 #endif // POSITION_H
