@@ -4,6 +4,7 @@
 #include <opencv/cv.h>
 #include <opencv/highgui.h>
 #include <opencv2/imgproc/imgproc.hpp>
+#include "Oops_class.h"
 #include "queue.h"
 
 
@@ -18,45 +19,42 @@ cv::Mat binary(cv::Mat img,float threshold)
 
 }
 
-int image::bfs(image img_class)
+int image::bfs()
 {   
 	queue q;
 	int x=0,y=0;
-	cv::Mat img=img_class->img_bin;
-	int cols=img.cols, rows=img.rows;
-    int count=1;
+	int cols=img_bin.cols, rows=img_bin.rows;
+  int count=1;
 
-	for(int j=0;j<img.rows;j++)
-		for(int i=0;i<img.cols;i++)
+	for(int j=0;j<img_bin.rows;j++)
+		for(int i=0;i<img_bin.cols;i++)
 		{
-           if((img.at<uchar>(i,j))==0)
+           if((img_bin.at<uchar>(i,j))==0)
            {
-           		if(img_class->visited[i][j]==-1)
+           		if(visited[i][j]==-1)
            		{
              		q.enqueue(i,j);
              		q.queueFront(&x,&y);
-             		img_class->visited[i][j]=0;
+             		visited[i][j]=0;
              
              		while(!q.isEmpty())
              		{	q.queueFront(&x,&y);
              			q.dequeue();
-             	        for(int l=y-1;l<=y+1;l++)
+             	    for(int l=y-1;l<=y+1;l++)
            				for(int k=x-1;k<=x+1;k++)
              			{
-             				if(k>0 && k<cols && l>0 && l<rows && img_class->visited[k][l]==-1 && img.at<uchar>(i,j)==0)
+             				if(k>0 && k<cols && l>0 && l<rows && visited[k][l]==-1 && img_bin.at<uchar>(i,j)==0)
              				{	
              					q.enqueue(k,l);
-             					img_class->visited[k][l]=count;
+             					visited[k][l]=count;
 
              				}
 
              			}
-             		
-            		
-             			img_class->visited[x][y]=count;
-                    }
-                    count++; 
-                    std::cout<<count<<std::endl;
+             	    visited[x][y]=count;
+                }
+                count++; 
+                std::cout<<count<<std::endl;
           		}
             
 

@@ -4,21 +4,21 @@
 #include <cstdlib>
 #include "Oops_class.h"
 
+
 //Has definitions of functions findCentroid, calcDist, Updatepos1, Updatepos2, printScore
-void image::findCentroid(cv::Mat img)
+void image::findCentroid()
 { 
-	
 	int *pixels= new int[count];
 	int blobno=0;
-	int rows=img.rows;
-	int cols=img.cols;
+	int rows=img_bin.rows;
+	int cols=img_bin.cols;
 	for(int j=0;j<rows;j++)
 	{
 		for(int i=0;i<cols;i++)
 		{
            if(visited[i][j]!=-1)
            {
-            	blobno=img.at<uchar>(i,j);
+            	blobno=visited[i][j];
             	(centroid[blobno]).x +=i;
             	(centroid[blobno]).y +=j;
             	pixels[blobno]++;

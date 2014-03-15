@@ -30,10 +30,10 @@ class image
         int **visited;
         image();
         pos *centroid;
-        int bfs(image *img_class);
+        int bfs();
         int updatepos1();
         int updatepos2();
-        void findCentroid(cv::Mat);
+        void findCentroid();
        void printScore();
     };
 
