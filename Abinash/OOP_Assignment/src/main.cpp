@@ -19,10 +19,12 @@ int main()
 {
    srand((unsigned int)time(NULL));
    Game bgame;
-   string file;
-   cout<<"Give filename"<<endl;
-   cin>>file;
-   Image bimg(file,&(bgame.bd1));
+   cout<<"s"<<endl;
+   Image bimg("fgame.bmp",&(bgame.bd1));
+   for (int i=0;i<(bgame.bd1.A.rn);i++)
+   {
+      cout<<bgame.bd1.A.r[i].x<<" "<<bgame.bd1.A.r[i].y<<endl;
+   }
    bgame.get_players();
    bgame.StartGame();
    cout<<"Winners :"<<endl;

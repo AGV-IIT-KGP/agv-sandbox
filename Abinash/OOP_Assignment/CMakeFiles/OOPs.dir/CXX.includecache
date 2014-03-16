@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/abinashmeher999/fuerte_workspace/OOPs_PS/src/Board.h
+Position.h
+/home/abinashmeher999/fuerte_workspace/OOPs_PS/src/Position.h
+
+/home/abinashmeher999/fuerte_workspace/OOPs_PS/src/Player.cpp
+Player.h
+/home/abinashmeher999/fuerte_workspace/OOPs_PS/src/Player.h
+
+/home/abinashmeher999/fuerte_workspace/OOPs_PS/src/Player.h
+Position.h
+/home/abinashmeher999/fuerte_workspace/OOPs_PS/src/Position.h
+Board.h
+/home/abinashmeher999/fuerte_workspace/OOPs_PS/src/Board.h
+iostream
+-
+cmath
+-
+
+/home/abinashmeher999/fuerte_workspace/OOPs_PS/src/Position.h
+

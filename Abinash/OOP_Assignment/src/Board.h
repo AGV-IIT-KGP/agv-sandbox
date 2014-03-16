@@ -1,7 +1,6 @@
 #ifndef BOARD_H
 #define BOARD_H
 #include "Position.h"
-#include "Image.h"
 
 struct pix{
    char c;

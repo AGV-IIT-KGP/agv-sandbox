@@ -12,7 +12,6 @@ Board::Board()
 {
    srand((unsigned int)time(NULL));
    Chan *x;
-   int i,j,k;
    x=&A;
    x->rn=0;
    x->gn=0;

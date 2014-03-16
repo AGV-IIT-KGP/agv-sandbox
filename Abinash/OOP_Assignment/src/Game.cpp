@@ -1,5 +1,4 @@
 #include "Game.h"
-#include <conio.h>
 
 void Game::get_players()
 {
@@ -19,7 +18,7 @@ void Game::trialturn()
    int i;
    for (i=0;i<no_players;i++)
    {
-      getch();
+      std::cin.get();
       Set[i].Getdice(dice.roll(),&bd1);
       std::cout<<"\tPlayer_"<<Set[i].id<<" @ "<<Set[i].pos.x<<","<<Set[i].pos.y<<" With score="<<Set[i].score<<"\n"<<std::endl;
    }
