@@ -19,31 +19,33 @@ public:
 	}
 };
 
-class queue
+class pqueue
 {
 private:
 	point *q;
 	int rear,lim;
 public:
-	queue(){
-		rear=0;
-	}
-	queue(int n){
+	pqueue(int n){
 		rear=0;
 		q=new point[n];
 		lim=n;
 	}
 	void enque(point a){
-		if(rear<lim)
-			q[rear++]=a;
+		if(rear<lim){
+			int i,index=0;
+			point temp_max;
+			for(i=0;i<rear && q[i].priority<=a.priority;++i);
+			for(;i<rear;++i)
+				q[i]=q[i+1];
+			rear++;
+		}
 		else
 			std::cout<<"Overflow";
 	}
 	point deque()
 	{
-		if(rear==0){
+		if(rear==0)
 			std::cout<<"Empty queue";
-		}
 		int i;
 		point first=q[0];
 		for(i=0;i<rear-1;++i)

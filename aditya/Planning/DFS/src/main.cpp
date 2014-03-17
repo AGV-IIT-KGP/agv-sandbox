@@ -35,10 +35,7 @@ int recurse(point a)
 	}
 	return 0;
 }
-void dfs(point orgn,point dstn, map mp)
-{
-	recurse(orgn);
-}
+
 void create_map()
 {
 	m.clear();
@@ -61,7 +58,7 @@ int main()
 	std::cout<<"Map before DFS traversal\n(-1=obstructions)\n(2=origin/destination)\n";
 	m.print();
 	// visit.print();
-	dfs(origin,destn,m);
+	recurse(origin);
 	m.set(origin,2);
 	std::cout<<"Map after DFS traversal\n";
 	m.print();
