@@ -35,7 +35,7 @@ char if_circle(cv::Mat img,int *x,int *y,char color)
 	img=cvtbinary(img,color);
 	cv::Rect ROI(*x,*y,img.cols-*x,img.rows-*y);
 	img=img(ROI);
-	showimg(img);
+//	showimg(img);
 	std::vector<cv::Vec3f> circles;
 	Canny(img,img,100,300,3);
 	GaussianBlur( img, img, cv::Size(9, 9), 2, 2 );
