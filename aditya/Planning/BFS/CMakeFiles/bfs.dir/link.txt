@@ -1,1 +1,0 @@
-/usr/bin/c++       CMakeFiles/bfs.dir/src/main.cpp.o  -o bfs -rdynamic 
