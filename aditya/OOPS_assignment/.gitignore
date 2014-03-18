@@ -6,7 +6,6 @@ game
 !lib.a
 CMakeCache.txt
 cmake_install.cmake
-*.jpeg
 # only ignore the root TODO file, not subdir/TODO
 /TODO
 # ignore all files in the build/ directory
