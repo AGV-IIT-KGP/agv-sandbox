@@ -325,15 +325,15 @@ p1.coeff[0]=p1.coeff[1]=p2.coeff[0]=p2.coeff[1]=1;
 struct poly p3=mult(p1,p2);
 for(int i=0;i<=2;i++)std::cout<<p3.coeff[i]<<" ";*/
 
-point* P=new point[3];
-for(int i=0;i<=2;i++){
+point* P=new point[6];
+for(int i=0;i<=5;i++){
 	P[i].x=i;
 	P[i].y=i*i+2*i-1;
 }
 struct poly p1=langrange(P);
 std::cout<<p1.degree<<std::endl;
 for(int i=0;i<=p1.degree;i++)std::cout<<p1.coeff[i]<<" ";
-
+std::cout<<std::endl;
 struct poly p_lane1,p_lane2;
 p_lane1.degree=p_lane2.degree=0;
 p_lane1.coeff=new float[1];
@@ -342,14 +342,15 @@ p_lane1.coeff[0]=p_lane2.coeff[0]=0;
 equation(mark,min_x,min_y,max_x,max_y,connected_index,&p_lane1,&p_lane2);
 for(int i=0;i<=p_lane1.degree;i++)std::cout<<p_lane1.coeff[i]<<" ";std::cout<<std::endl;
 for(int i=0;i<=p_lane2.degree;i++)std::cout<<p_lane2.coeff[i]<<" ";std::cout<<std::endl;
+
 cv::Mat func(road.rows,road.cols,CV_8UC3);
 for(int i=0;i<road.rows;i++){
-	int j=p_lane1.coeff[5]+i*(p_lane1.coeff[4]+i*(p_lane1.coeff[3]+i*(p_lane1.coeff[2]+i*(p_lane1.coeff[1]+i*p_lane1.coeff[0]))));
-	int k=p_lane2.coeff[5]+i*(p_lane2.coeff[4]+i*(p_lane2.coeff[3]+i*(p_lane2.coeff[2]+i*(p_lane2.coeff[1]+i*p_lane2.coeff[0]))));
-	int l=p1.coeff[5]+i*(p1.coeff[4]+i*(p1.coeff[3]+i*(p1.coeff[2]+i*(p1.coeff[1]+i*p1.coeff[0]))));;
+	int j=p_lane1.coeff[5]+i*(p_lane1.coeff[4]+i*(p_lane1.coeff[3]+i*(p_lane1.coeff[2]+i*(p_lane1.coeff[1]+i*p_lane1.coeff[0]))))/1;
+	int k=p_lane2.coeff[5]+i*(p_lane2.coeff[4]+i*(p_lane2.coeff[3]+i*(p_lane2.coeff[2]+i*(p_lane2.coeff[1]+i*p_lane2.coeff[0]))))/10;
+	//int l=p1.coeff[5]+i*(p1.coeff[4]+i*(p1.coeff[3]+i*(p1.coeff[2]+i*(p1.coeff[1]+i*p1.coeff[0]))));;
 	if(j>=0 && j<road.cols)cv::circle(func,cv::Point(i,j),4,cv::Scalar(255,0,0),-1);
 	if(k>=0 && k<road.cols)cv::circle(func,cv::Point(i,k),4,cv::Scalar(0,255,0),-1);
-	if(l>=0 && l<road.cols)cv::circle(func,cv::Point(i,l),4,cv::Scalar(0,0,255),-1);
+	//if(l>=0 && l<road.cols)cv::circle(func,cv::Point(i,l),4,cv::Scalar(0,0,255),-1);
 }
 cv::namedWindow("function",CV_WINDOW_AUTOSIZE);
 cv::imshow("function",func);
