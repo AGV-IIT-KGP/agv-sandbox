@@ -346,10 +346,10 @@ cv::Mat func(road.rows,road.cols,CV_8UC3);
 for(int i=0;i<road.rows;i++){
 	int j=p_lane1.coeff[5]+i*(p_lane1.coeff[4]+i*(p_lane1.coeff[3]+i*(p_lane1.coeff[2]+i*(p_lane1.coeff[1]+i*p_lane1.coeff[0]))));
 	int k=p_lane2.coeff[5]+i*(p_lane2.coeff[4]+i*(p_lane2.coeff[3]+i*(p_lane2.coeff[2]+i*(p_lane2.coeff[1]+i*p_lane2.coeff[0]))));
-	//int l=i;
+	int l=p1.coeff[5]+i*(p1.coeff[4]+i*(p1.coeff[3]+i*(p1.coeff[2]+i*(p1.coeff[1]+i*p1.coeff[0]))));;
 	if(j>=0 && j<road.cols)cv::circle(func,cv::Point(i,j),4,cv::Scalar(255,0,0),-1);
 	if(k>=0 && k<road.cols)cv::circle(func,cv::Point(i,k),4,cv::Scalar(0,255,0),-1);
-	//if(l>=0 && l<road.cols)cv::circle(func,cv::Point(i,l),4,cv::Scalar(0,0,255),-1);
+	if(l>=0 && l<road.cols)cv::circle(func,cv::Point(i,l),4,cv::Scalar(0,0,255),-1);
 }
 cv::namedWindow("function",CV_WINDOW_AUTOSIZE);
 cv::imshow("function",func);
