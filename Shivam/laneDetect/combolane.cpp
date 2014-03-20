@@ -209,7 +209,7 @@ void img_process::findCentroid(cv::Mat img_bin)
     {
         centre=centroid[i];
         cv::Vec3b point= img.at<cv::Vec3b>(centre.x,centre.y);
-        if(point[0]>1500 && point[1]<100 && point[2]<100)
+        if(point[0]>150 && point[1]<100 && point[2]<100)
             (centroid[i]).colour= 0;
         else if(point[0]<100 && point[1]>150 && point[2]<100)
             (centroid[i]).colour= 1;
@@ -298,8 +298,8 @@ int main()
     cv::waitKey(0);
     img_process img_p;
     cv::Mat img,img_bin, img_lanes;
-    img_p.img= cv::imread("/home/aries/Desktop/images.jpg",3);
-    img_bin= cv::imread("/home/aries/Desktop/images.jpg",0);
+    img_p.img= cv::imread("/home/aries/Desktop/lane.png",3);
+    img_bin= cv::imread("/home/aries/Desktop/lane.png",0);
     img_bin= img_p.binary(img_bin,10);
     cv::namedWindow("image",CV_WINDOW_AUTOSIZE);
     cv::imshow("image",img_bin);
