@@ -279,7 +279,11 @@ free(min_x_lane_eq);
 free(min_y_lane_eq);
 } 
 
+void plot_function(cv::Mat& func,point P){
+	
 
+
+}
 
 int main(){
 cv::Mat road=cv::imread("road_image.png",CV_LOAD_IMAGE_COLOR);
@@ -338,4 +342,16 @@ p_lane1.coeff[0]=p_lane2.coeff[0]=0;
 equation(mark,min_x,min_y,max_x,max_y,connected_index,&p_lane1,&p_lane2);
 for(int i=0;i<=p_lane1.degree;i++)std::cout<<p_lane1.coeff[i]<<" ";std::cout<<std::endl;
 for(int i=0;i<=p_lane2.degree;i++)std::cout<<p_lane2.coeff[i]<<" ";std::cout<<std::endl;
+cv::Mat func(road.rows,road.cols,CV_8UC3);
+for(int i=0;i<road.rows;i++){
+	int j=p_lane1.coeff[5]+i*(p_lane1.coeff[4]+i*(p_lane1.coeff[3]+i*(p_lane1.coeff[2]+i*(p_lane1.coeff[1]+i*p_lane1.coeff[0]))));
+	int k=p_lane2.coeff[5]+i*(p_lane2.coeff[4]+i*(p_lane2.coeff[3]+i*(p_lane2.coeff[2]+i*(p_lane2.coeff[1]+i*p_lane2.coeff[0]))));
+	//int l=i;
+	if(j>=0 && j<road.cols)cv::circle(func,cv::Point(i,j),4,cv::Scalar(255,0,0),-1);
+	if(k>=0 && k<road.cols)cv::circle(func,cv::Point(i,k),4,cv::Scalar(0,255,0),-1);
+	//if(l>=0 && l<road.cols)cv::circle(func,cv::Point(i,l),4,cv::Scalar(0,0,255),-1);
+}
+cv::namedWindow("function",CV_WINDOW_AUTOSIZE);
+cv::imshow("function",func);
+cv::waitKey(0);
 }
