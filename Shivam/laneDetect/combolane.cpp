@@ -293,13 +293,13 @@ cv::Mat img_process::link(cv::Mat img_bin,int thresh)
     return img_bin;
 }   
 
-int main()
+int main(int argc, char* argv[])
 {
     cv::waitKey(0);
     img_process img_p;
     cv::Mat img,img_bin, img_lanes;
-    img_p.img= cv::imread("/home/aries/Desktop/lane.png",3);
-    img_bin= cv::imread("/home/aries/Desktop/lane.png",0);
+    img_p.img= cv::imread(argv[1],3);
+    img_bin= cv::imread(argv[1],0);
     img_bin= img_p.binary(img_bin,10);
     cv::namedWindow("image",CV_WINDOW_AUTOSIZE);
     cv::imshow("image",img_bin);
