@@ -1,4 +1,4 @@
- #include <opencv2/opencv.hpp>
+#include <opencv2/opencv.hpp>
 #include <opencv2/core/core.hpp>
 #include <opencv2/core/mat.hpp>
 #include <opencv2/core/operations.hpp>
@@ -7,6 +7,7 @@
 #include <iostream>
 #include <vector>
 #include <math.h>
+
 using namespace cv;
 using namespace std;
 
@@ -28,6 +29,15 @@ double minimum(double dis1,double dis2,double dis3,double dis4){
 	else
 		return dis4;
 }
+
+struct function{
+	int k;
+	int fk;
+};
+
+struct polynomial{
+	double a0,a1,a2,a3,a4,a5;
+};
 
 
  int main(){
@@ -66,9 +76,13 @@ double minimum(double dis1,double dis2,double dis3,double dis4){
 			mid_y=(l[1]+l[3])/2;
 			dis=dist(mid_x,0,mid_y,0);
 			if (dis<average)
-				{line(hough,Point(l[0],l[1]),Point(l[2],l[3]),Scalar(255,0,0),3,CV_AA);color[i]='b';}
+			{
+				line(hough,Point(l[0],l[1]),Point(l[2],l[3]),Scalar(255,0,0),3,CV_AA);color[i]='b';
+			}
 			else
-				{line(hough,Point(l[0],l[1]),Point(l[2],l[3]),Scalar(0,255,0),3,CV_AA);color[i]='g';}
+			{
+				line(hough,Point(l[0],l[1]),Point(l[2],l[3]),Scalar(0,255,0),3,CV_AA);color[i]='g';
+			}
 		}
 	}
 	if (av_theta>0.5){
@@ -79,9 +93,13 @@ double minimum(double dis1,double dis2,double dis3,double dis4){
 			mid_y=(l[1]+l[3])/2;
 			dis=dist(mid_x,0,mid_y,lane.rows-1);
 			if (dis<average)
-				{line(hough,Point(l[0],l[1]),Point(l[2],l[3]),Scalar(255,0,0),3,CV_AA);color[i]='b';}
+				{
+					line(hough,Point(l[0],l[1]),Point(l[2],l[3]),Scalar(255,0,0),3,CV_AA);color[i]='b';
+				}
 			else
-				{line(hough,Point(l[0],l[1]),Point(l[2],l[3]),Scalar(0,255,0),3,CV_AA);color[i]='g';}
+				{
+					line(hough,Point(l[0],l[1]),Point(l[2],l[3]),Scalar(0,255,0),3,CV_AA);color[i]='g';
+				}
 		}
 	}
 	if (av_theta<0.5 && av_theta>-0.5){
@@ -95,20 +113,28 @@ double minimum(double dis1,double dis2,double dis3,double dis4){
 				{line(hough,Point(l[0],l[1]),Point(l[2],l[3]),Scalar(0,255,0),3,CV_AA);color[i]='g';}
 		}
 	}
+	namedWindow("hough",1);
+	imshow("hough",hough);
+	waitKey(0);
+
 	Point bpt1,bpt2,gpt1,gpt2;
 	bpt1.y=0;bpt2.y=1000;gpt1.y=0;gpt2.y=1000;
 	for (i=0;i<lines.size();i++){
 		Vec4i l=lines[i];
 		if (color[i]=='b'){
 			if (l[1]>bpt1.y)
-				{bpt1.y=l[1];bpt1.x=l[0];}
+				{
+					bpt1.y=l[1];bpt1.x=l[0];
+				}
 			if (l[1]<bpt2.y){
 				bpt2.y=l[1];bpt2.x=l[0];
 			}
 		}
 		if (color[i]=='g'){
 			if (l[1]>gpt1.y)
-				{gpt1.y=l[1];gpt1.x=l[0];}
+			{
+				gpt1.y=l[1];gpt1.x=l[0];
+			}
 			if (l[1]<gpt2.y){
 				gpt2.y=l[1];gpt2.x=l[0];
 			}
@@ -122,9 +148,80 @@ double minimum(double dis1,double dis2,double dis3,double dis4){
 		cout<<"both lines are same "<<endl;
 	else
 		cout<<"both lines are distinct"<<endl;
+	size_t storei;
+	int count=0;function pts[6];
+	for (i=0;i<lines.size();i+=3){
+		Vec4i l=lines[i];
+		
+		if (color[i]=='b' && count<6){
+			pts[count].k=(l[0]+l[2])/2;
+			pts[count].fk=(l[1]+l[3])/2;
+			count++;
+		}
+	}
+	cout<<count<<endl;
+	cout<<pts[0].k<<" "<<pts[1].k<<" "<<pts[2].k<<" "<<pts[3].k<<" "<<pts[4].k<<" "<<pts[5].k<<endl;
+	polynomial f;
+	f.a0=f.a1=f.a2=f.a3=f.a4=f.a5;
+	storei=(--i);
+	int product=1;
+	double temp0=0,temp1=0,temp2=0,temp3=0,temp4=0,temp5=0,temp6=0;
+	for (int g=0;g<count;g++){
+		for (int h=0;h<count;h++){
+			if (h!=g){
+				product*=(pts[g].k-pts[h].k);
+				temp1+=pts[h].k;
+				for (int n=0;n<count;n++){
+					if (n!=h && n!=g){
+						temp2+=pts[h].k*pts[n].k;
+						for (int m=0;m<count;m++){
+							if (m!=n && m!=h && m!=g){
+								temp3+=pts[h].k*pts[n].k*pts[m].k;
+								for  (int o=0;o<count;o++){
+									if (o!=m && o!=n && o!=h && o!=g){
+										temp4+=pts[h].k*pts[n].k*pts[m].k*pts[o].k;
+										for (int p=0;p<count;p++){
+											if (p!=o && p!=m && p!=n && p!=h && p!=g){
+												temp5+=pts[h].k*pts[n].k*pts[m].k*pts[o].k*pts[p].k;
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
 
-	namedWindow("hough",1);
-	imshow("hough",hough);
+			}
+		}
+		f.a0+=(double)pts[g].fk/product;
+		f.a1+=-(double)(temp1/product)*pts[g].fk;
+		f.a2+=(double)(temp2/product/2)*pts[g].fk;
+		f.a3+=-(double)(temp3/product/6)*pts[g].fk;
+		f.a4+=(double)(temp4/product/24)*pts[g].fk;
+		f.a5+=-(double)(temp5/product/120)*pts[g].fk;
+		temp1=temp2=temp3=temp4=temp5=0;
+		product=1;
+	}
+	cout<<f.a0<<" "<<f.a1<<" "<<f.a2<<" "<<f.a3<<" "<<f.a4<<" "<<f.a5<<" "<<endl;
+	waitKey(0);
+	Mat curve(lane.rows,lane.cols,CV_8UC3,cvScalarAll(0));
+	int n;
+	for (int m=0;m<curve.cols;m++){
+		 n=(f.a0*m*m*m*m*m+f.a1*m*m*m*m+f.a2*m*m*m+f.a3*m*m+f.a4*m+f.a5);
+		 cout<<"n is "<<n<<endl;
+			if (n>=0 && n<curve.rows)
+			{	
+				cout<<"m is "<<m<<endl;
+				cout<<"yes"<<endl;
+				waitKey(0);
+				circle(curve,Point(m,n),10,Scalar(255,255,0),-1,8,0);
+			}
+	}
+	
+
+	//namedWindow("hough",1);
+	imshow("hough",curve);
 	imwrite("hough.jpg",hough);
 	waitKey(0);
 }
