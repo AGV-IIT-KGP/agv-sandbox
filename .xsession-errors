@@ -1,0 +1,96 @@
+Backend     : gconf
+Integration : true
+Profile     : unity
+Adding plugins
+Initializing core options...done
+Initializing composite options...done
+Initializing opengl options...done
+Initializing decor options...done
+Initializing vpswitch options...done
+Initializing snap options...done
+Initializing mousepoll options...done
+Initializing resize options...done
+Initializing place options...done
+Initializing move options...done
+Initializing wall options...done
+Initializing grid options...done
+** Message: applet now removed from the notification area
+I/O warning : failed to load external entity "/home/ayushi/.compiz/session/104f7ef2d61233d7c3139541402853684200000016110033"
+Initializing session options...done
+Initializing gnomecompat options...done
+Initializing animation options...done
+Initializing fade options...done
+Initializing unitymtgrabhandles options...done
+Initializing workarounds options...done
+Initializing scale options...done
+compiz (expo) - Warn: failed to bind image to texture
+Initializing expo options...done
+Initializing ezoom options...done
+** Message: using fallback from indicator to GtkStatusIcon
+
+(compiz:1680): GConf-CRITICAL **: gconf_client_add_dir: assertion `gconf_valid_key (dirname, NULL)' failed
+Initializing unityshell options...done
+Setting Update "main_menu_key"
+Setting Update "run_key"
+** Message: moving back from GtkStatusIcon to indicator
+
+** (zeitgeist-datahub:1856): WARNING **: recent-manager-provider.vala:133: Desktop file for "file:///home/ayushi/fuerte_workspace/sandbox/image/include/image/node.hpp" was not found, exec: sublime_text, mime_type: text/x-c++hdr
+
+** (nautilus:1702): WARNING **: Error calling current_status: Method "current_status" with signature "" on interface "com.ubuntuone.SyncDaemon.Status" doesn't exist
+
+
+** (nautilus:1702): CRITICAL **: syncdaemon_status_info_get_online: assertion `SYNCDAEMON_IS_STATUS_INFO (sinfo)' failed
+2014-03-21 20:32:15,548 - softwarecenter.ui.gtk3.app - INFO - setting up proxy 'http://144.16.192.247:8080/'
+2014-03-21 20:32:15,708 - softwarecenter.db.database - INFO - open() database: path=None use_axi=True use_agent=True
+2014-03-21 20:32:16,039 - softwarecenter.region - WARNING - failed to use geoclue: 'org.freedesktop.Geoclue.Error.notAvailable: Geoclue master client has no usable Address providers'
+2014-03-21 20:32:16,584 - softwarecenter.backend.reviews - WARNING - Could not get usefulness from server, no username in config file
+2014-03-21 20:32:16,697 - softwarecenter.ui.gtk3.app - INFO - show_available_packages: search_text is '', app is [Application: appname= pkgname=gnome-paint].
+2014-03-21 20:32:16,709 - softwarecenter.db.pkginfo_impl.aptcache - INFO - aptcache.open()
+2014-03-21 20:32:20,407 - softwarecenter.backend.spawn_helper - WARNING - exit code 1 from helper for '['/usr/share/software-center/piston_generic_helper.py', '--datadir', '/usr/share/software-center/', 'SoftwareCenterAgentAPI', 'exhibits', '{"lang": "en", "series": "precise"}']'
+2014-03-21 20:32:20,407 - softwarecenter.backend.spawn_helper - WARNING - got error from helper: 'ERROR:__main__:urclient_apps
+Traceback (most recent call last):
+  File "/usr/share/software-center/piston_generic_helper.py", line 214, in <module>
+    piston_reply = f(**kwargs)
+  File "/usr/lib/python2.7/dist-packages/piston_mini_client/validators.py", line 44, in wrapper
+    return func(*args, **kwargs)
+  File "/usr/lib/python2.7/dist-packages/piston_mini_client/validators.py", line 44, in wrapper
+    return func(*args, **kwargs)
+  File "/usr/lib/python2.7/dist-packages/piston_mini_client/__init__.py", line 137, in wrapper
+    body = func(self, *args, **kwargs)
+  File "/usr/share/software-center/softwarecenter/backend/piston/scaclient_pristine.py", line 59, in exhibits
+    return self._get(url)
+  File "/usr/lib/python2.7/dist-packages/piston_mini_client/__init__.py", line 368, in _get
+    headers=headers)
+  File "/usr/lib/python2.7/dist-packages/piston_mini_client/__init__.py", line 523, in _request
+    method=method, body=body, headers=headers)
+  File "/usr/lib/python2.7/dist-packages/httplib2/__init__.py", line 1444, in request
+    (response, content) = self._request(conn, authority, uri, request_uri, method, body, headers, redirections, cachekey)
+  File "/usr/lib/python2.7/dist-packages/httplib2/__init__.py", line 1196, in _request
+    (response, content) = self._conn_request(conn, request_uri, method, body, headers)
+  File "/usr/lib/python2.7/dist-packages/httplib2/__init__.py", line 1132, in _conn_request
+    conn.connect()
+  File "/usr/lib/python2.7/dist-packages/httplib2/__init__.py", line 889, in connect
+    sock.connect((self.host, self.port))
+  File "/usr/lib/python2.7/dist-packages/httplib2/socks.py", line 403, in connect
+    raise GeneralProxyError((5, _generalerrors[5]))
+GeneralProxyError: (5, 'bad input')
+'
+debconf: DbDriver "passwords" warning: could not open /var/cache/debconf/passwords.dat: Permission denied
+debconf: DbDriver "passwords" warning: could not open /var/cache/debconf/passwords.dat: Permission denied
+debconf: DbDriver "passwords" warning: could not open /var/cache/debconf/passwords.dat: Permission denied
+debconf: DbDriver "passwords" warning: could not open /var/cache/debconf/passwords.dat: Permission denied
+2014-03-21 20:33:39,457 - softwarecenter.region - WARNING - failed to use geoclue: 'org.freedesktop.Geoclue.Error.notAvailable: Geoclue master client has no usable Address providers'
+2014-03-21 20:33:39,631 - softwarecenter.db.update - INFO - skipping region restricted app: 'Bulleti d'esquerra de Calonge i Sant Antoni ' (not whitelisted)
+2014-03-21 20:33:40,123 - softwarecenter.db.update - INFO - skipping region restricted app: 'Source Code Analyzer' (not whitelisted)
+2014-03-21 20:33:40,214 - softwarecenter.db.update - INFO - skipping region restricted app: 'Flaggame' (not whitelisted)
+2014-03-21 20:33:40,368 - softwarecenter.db.update - INFO - skipping region restricted app: 'Comentarios Web' (not whitelisted)
+debconf: DbDriver "passwords" warning: could not open /var/cache/debconf/passwords.dat: Permission denied
+2014-03-21 20:33:40,575 - softwarecenter.db.update - INFO - skipping region restricted app: 'reEarCandy' (not whitelisted)
+2014-03-21 20:33:41,990 - softwarecenter.ui.gtk3.app - INFO - software-center-agent finished with status 0
+2014-03-21 20:33:41,990 - softwarecenter.db.database - INFO - reopen() database
+2014-03-21 20:33:41,990 - softwarecenter.db.database - INFO - open() database: path=None use_axi=True use_agent=True
+2014-03-21 20:33:49,938 - softwarecenter.db.pkginfo_impl.aptcache - INFO - aptcache.open()
+2014-03-21 20:33:59,358 - softwarecenter.db.pkginfo_impl.aptcache - INFO - aptcache.open()
+Nautilus-Share-Message: Called "net usershare info" but it failed: 'net usershare' returned error 255: net usershare: cannot open usershare directory /var/lib/samba/usershares. Error No such file or directory
+Please ask your system administrator to enable user sharing.
+
