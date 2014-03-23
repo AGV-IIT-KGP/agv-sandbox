@@ -7,7 +7,7 @@ void dijkstra(int origin,int dest,pqueue *que,graph* g)
 	que->enque(origin,-1);
 	prev=origin;
 	while(1){
-		que->print();
+		//que->print();
 		a=que->deque();
 		g->set_distn(a,prev);
 		if(a==dest){
@@ -18,7 +18,7 @@ void dijkstra(int origin,int dest,pqueue *que,graph* g)
 			if(g->adj_list[i][a])
 				que->enque(i,a);
 		}
-		que->print();
+		//que->print();
 		prev=a;
 	}
 }

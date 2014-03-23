@@ -89,14 +89,3 @@ public:
 		std::cout<<std::endl;
 	}
 };
-/*
-int main()
-{
-	graph g;
-	pqueue q(g.get_size(),&g);
-	q.enque(0,-1);
-	q.enque(1,0);
-	q.enque(2,0);
-	q.print();
-	return 0;
-}*/
