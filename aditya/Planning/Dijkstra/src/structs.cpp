@@ -1,89 +1,102 @@
-#include <iostream>
+#include<iostream>
+#define INFINITY 9999
 
-class point
+class node
 {	
 public:
-	int x,y;
-	point(){
-		x=0;
-		y=0;
+	int visit,distn;
+	node(){
+		visit=-1;
+		distn=INFINITY;
 	}
-	point(int a,int b){
-		x=a;
-		y=b;
-	}
-	bool operator== (point a){
+	/*bool operator== (point a){
 		if(x==a.x && y==a.y)
 			return 1;
 		return 0;
+	}*/
+};
+
+class graph
+{
+private:
+	int n,edges;
+	node *arr;
+public:
+	int** adj_list;
+	graph(){
+		std::cout<<"Enter number of nodes:";
+		std::cin>>n;
+		arr=new node[n];
+		std::cout<<"Enter number of edges:";
+		std::cin>>edges;
+		adj_list = new int*[n];
+		for(int i=0;i<n;++i)
+    		adj_list[i]=new int[n];
+    	for(int i=0;i<n;i++)
+    		for(int j=0;j<n;j++)
+    			adj_list[i][j]=0;
+		int origin,dest,weight;
+		std::cout<<"Enter the connecting nodes and weight of each edge:"<<std::endl;
+		for(int i=0;i<edges;i++){
+			std::cin>>origin>>dest>>weight;
+			adj_list[origin][dest]=weight;
+			adj_list[dest][origin]=weight;
+		}
+	}
+	int get_size(){
+		return n;
+	}
+	node* get_node(int index){
+		return &arr[index];
+	}
+	void set_distn(int index,int b){
+		if(arr[index].distn>(adj_list[index][b]+arr[b].distn))
+			arr[index].distn=adj_list[index][b];
 	}
 };
 
 class pqueue
 {
 private:
-	point *q;
-	int rear,lim;
+	int rear,lim,*q;
+	graph *g;
 public:
-	pqueue(int n){
+	pqueue(int n, graph *pointer){
 		rear=0;
-		q=new point[n];
+		q=new int[n];
 		lim=n;
+		g=pointer;
 	}
-	void enque(point a){
-		if(rear<lim){
-			int i,index=0;
-			point temp_max;
-			for(i=0;i<rear && q[i].priority<=a.priority;++i);
-			for(;i<rear;++i)
-				q[i]=q[i+1];
+	void enque(int p,int p_prev){
+		if(rear<lim && g->get_node(p)->visit==-1){
+			int i,j;
+			for(i=0;i<rear && g->get_node(i)->distn>=g->get_node(p)->distn;++i);
+			for(j=rear;j>i;--j)
+				q[j]=q[j-1];
+			q[j]=p;
 			rear++;
+			g->get_node(p)->visit=p_prev;
 		}
-		else
-			std::cout<<"Overflow";
 	}
-	point deque()
-	{
-		if(rear==0)
+	int deque(){
+		if(!rear)
 			std::cout<<"Empty queue";
-		int i;
-		point first=q[0];
-		for(i=0;i<rear-1;++i)
-			q[i]=q[i+1];
-		rear--;
-		return first;
-	}
-};
-
-class map
-{
-private:
-	int i,j;
-	int **array;
-public:
-	int size;
-	map(int n){
-		array = new int*[n];
-		for(i=0;i<n;++i)
-    		array[i] = new int[n];
-		size=n;
-	}
-	void clear(){
-		for(i=0;i<size;++i)
-			for(j=0;j<size;++j)
-				array[i][j]=0;
-	}
-	void set(point p,int a){
-		array[p.x][p.y]=a;
-	}
-	int look(int x,int y){
-		return array[x][y];
+		return q[--rear];
 	}
 	void print(){
-		for(i=0;i<size;++i){
-			for(j=0;j<size;++j)
-				std::cout<<array[i][j]<<"\t";
-			std::cout<<std::endl<<std::endl;
-		}
+		for(int i=0;i<rear;++i)
+			std::cout<<q[i];
+		std::cout<<std::endl;
 	}
 };
+/*
+int main()
+{
+	graph g;
+	pqueue q(g.get_size(),&g);
+	q.enque(0,-1);
+	q.enque(1,0);
+	q.enque(2,0);
+	q.print();
+	return 0;
+}*/
