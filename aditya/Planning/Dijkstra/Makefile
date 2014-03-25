@@ -108,29 +108,29 @@ dijkstra/fast:
 	$(MAKE) -f CMakeFiles/dijkstra.dir/build.make CMakeFiles/dijkstra.dir/build
 .PHONY : dijkstra/fast
 
-src/main.o: src/main.cpp.o
-.PHONY : src/main.o
+src/dijkstra.o: src/dijkstra.cpp.o
+.PHONY : src/dijkstra.o
 
 # target to build an object file
-src/main.cpp.o:
-	$(MAKE) -f CMakeFiles/dijkstra.dir/build.make CMakeFiles/dijkstra.dir/src/main.cpp.o
-.PHONY : src/main.cpp.o
+src/dijkstra.cpp.o:
+	$(MAKE) -f CMakeFiles/dijkstra.dir/build.make CMakeFiles/dijkstra.dir/src/dijkstra.cpp.o
+.PHONY : src/dijkstra.cpp.o
 
-src/main.i: src/main.cpp.i
-.PHONY : src/main.i
+src/dijkstra.i: src/dijkstra.cpp.i
+.PHONY : src/dijkstra.i
 
 # target to preprocess a source file
-src/main.cpp.i:
-	$(MAKE) -f CMakeFiles/dijkstra.dir/build.make CMakeFiles/dijkstra.dir/src/main.cpp.i
-.PHONY : src/main.cpp.i
+src/dijkstra.cpp.i:
+	$(MAKE) -f CMakeFiles/dijkstra.dir/build.make CMakeFiles/dijkstra.dir/src/dijkstra.cpp.i
+.PHONY : src/dijkstra.cpp.i
 
-src/main.s: src/main.cpp.s
-.PHONY : src/main.s
+src/dijkstra.s: src/dijkstra.cpp.s
+.PHONY : src/dijkstra.s
 
 # target to generate assembly for a file
-src/main.cpp.s:
-	$(MAKE) -f CMakeFiles/dijkstra.dir/build.make CMakeFiles/dijkstra.dir/src/main.cpp.s
-.PHONY : src/main.cpp.s
+src/dijkstra.cpp.s:
+	$(MAKE) -f CMakeFiles/dijkstra.dir/build.make CMakeFiles/dijkstra.dir/src/dijkstra.cpp.s
+.PHONY : src/dijkstra.cpp.s
 
 # Help Target
 help:
@@ -141,9 +141,9 @@ help:
 	@echo "... dijkstra"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... src/main.o"
-	@echo "... src/main.i"
-	@echo "... src/main.s"
+	@echo "... src/dijkstra.o"
+	@echo "... src/dijkstra.i"
+	@echo "... src/dijkstra.s"
 .PHONY : help
 
 
