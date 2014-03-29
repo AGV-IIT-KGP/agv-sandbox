@@ -1,27 +1,34 @@
-#include <iostream>
+#include <stdio.h>
 #include "structs.cpp"
+#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/core/core.hpp>
+#include <opencv2/opencv.hpp>
 
-map m(7);
-map visit(7);
-queue que(49);
-point origin(1,5);
-point destn(5,1);
+cv::Mat img(200,200,CV_8UC1,cvScalarAll(255));
+map visit(img.cols,img.rows);
+queue que(img.cols*img.rows);
+//point origin(rand()%img.cols,rand()%img.rows);
+point origin(5,5);
+point destn(7,7);
+//point destn(rand()%img.cols,rand()%img.rows);
 
 char check(point a)
 {
-	if(a.x<0 || a.x>=m.size || a.y<0 || a.y>=m.size || visit.look(a.x,a.y)==1 || m.look(a.x,a.y)==-1)
+	if(a.x<0 || a.x>=img.rows || a.y<0 || a.y>=img.cols || visit.look(a.x,a.y)==1 || img.at<uchar>(a.x,a.y)<100)
 		return 0;
 	else
 		return 1;
 }
 
-void bfs(point ** prev)
+void bfs(point** prev)
 {
 	point a;
 	que.enque(origin);
 	visit.set(origin,1);
 	while(1){
+		cv::waitKey(5);
 		a=que.deque();
+		printf("%d %d\n",a.x,a.y);
 		if(a==destn)
 			return;
 		point p(a.x,a.y-1),q(a.x+1,a.y),r(a.x,a.y+1),s(a.x-1,a.y);
@@ -52,37 +59,29 @@ void construct_path(point **prev)
 {
 	point temp=prev[destn.x][destn.y];
 	while(!(temp==origin)){
-		m.set(temp,1);
+		img.at<uchar>(temp.x,temp.y)=0;
 		temp=prev[temp.x][temp.y];
 	}
-}
-
-void create_map()
-{
-	m.clear();
-	visit.clear();
-	point p(2,2),q(3,4),r(4,1),s(4,3),t(4,4);
-	m.set(p,-1);
-	m.set(q,-1);
-	m.set(r,-1);
-	m.set(s,-1);
-	m.set(t,-1);
-	m.set(origin,2);
-	m.set(destn,2);
 }
 
 int main()
 {
 	int i;
-	create_map();
-	point **prev=new point*[7];
-	for(i=0;i<7;++i)
- 		prev[i]=new point[7];
-	std::cout<<"Map before BFS traversal\n(-1=obstructions)\n(2=origin/destination)\n";
-	m.print();
+	printf("Map before BFS traversal\n");
+	img.at<uchar>(origin.y,origin.x)=0;
+	img.at<uchar>(destn.y,destn.x)=0;
+	cv::imshow("window",img);
+	cv::waitKey(5000);
+	cv::destroyWindow("window");
+	printf("hello\n");
+	point **prev=new point*[img.cols];
+	for(i=0;i<img.cols;++i)
+ 		prev[i]=new point[img.rows];
 	bfs(prev);
+	printf("hello\n");
 	construct_path(prev);
-	std::cout<<"Map after BFS traversal\n";
-	m.print();
+	printf("Map after BFS traversal\n");
+	cv::imshow("window",img);
+	cv::waitKey(5000);
 	return 0;
 }

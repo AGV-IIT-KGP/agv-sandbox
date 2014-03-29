@@ -56,19 +56,19 @@ public:
 class map
 {
 private:
-	int i,j;
+	int i,j,x,y;
 	int **array;
 public:
-	int size;
-	map(int n){
+	map(int n,int m){
+		x=n;
+		y=m;
 		array = new int*[n];
 		for(i=0;i<n;++i)
-    		array[i] = new int[n];
-		size=n;
+    		array[i] = new int[m];
 	}
 	void clear(){
-		for(i=0;i<size;++i)
-			for(j=0;j<size;++j)
+		for(i=0;i<x;++i)
+			for(j=0;j<y;++j)
 				array[i][j]=0;
 	}
 	void set(point p,int a){
@@ -77,11 +77,10 @@ public:
 	int look(int x,int y){
 		return array[x][y];
 	}
-	void print(){
-		for(i=0;i<size;++i){
-			for(j=0;j<size;++j)
-				std::cout<<array[i][j]<<"\t";
-			std::cout<<std::endl<<std::endl;
-		}
-	}
+	// void print(){
+	// 	for(i=0;i<size;++i){
+	// 		for(j=0;j<size;++j)
+	// 			std::cout<<array[i][j]<<"\t";
+	// 		std::cout<<std::endl<<std::endl;
+	// 	}}
 };

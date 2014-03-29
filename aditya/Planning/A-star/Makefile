@@ -96,41 +96,41 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named a-star
+# Target rules for targets named astar
 
 # Build rule for target.
-a-star: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 a-star
-.PHONY : a-star
+astar: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 astar
+.PHONY : astar
 
 # fast build rule for target.
-a-star/fast:
-	$(MAKE) -f CMakeFiles/a-star.dir/build.make CMakeFiles/a-star.dir/build
-.PHONY : a-star/fast
+astar/fast:
+	$(MAKE) -f CMakeFiles/astar.dir/build.make CMakeFiles/astar.dir/build
+.PHONY : astar/fast
 
-src/a-star.o: src/a-star.cpp.o
-.PHONY : src/a-star.o
+src/astar.o: src/astar.cpp.o
+.PHONY : src/astar.o
 
 # target to build an object file
-src/a-star.cpp.o:
-	$(MAKE) -f CMakeFiles/a-star.dir/build.make CMakeFiles/a-star.dir/src/a-star.cpp.o
-.PHONY : src/a-star.cpp.o
+src/astar.cpp.o:
+	$(MAKE) -f CMakeFiles/astar.dir/build.make CMakeFiles/astar.dir/src/astar.cpp.o
+.PHONY : src/astar.cpp.o
 
-src/a-star.i: src/a-star.cpp.i
-.PHONY : src/a-star.i
+src/astar.i: src/astar.cpp.i
+.PHONY : src/astar.i
 
 # target to preprocess a source file
-src/a-star.cpp.i:
-	$(MAKE) -f CMakeFiles/a-star.dir/build.make CMakeFiles/a-star.dir/src/a-star.cpp.i
-.PHONY : src/a-star.cpp.i
+src/astar.cpp.i:
+	$(MAKE) -f CMakeFiles/astar.dir/build.make CMakeFiles/astar.dir/src/astar.cpp.i
+.PHONY : src/astar.cpp.i
 
-src/a-star.s: src/a-star.cpp.s
-.PHONY : src/a-star.s
+src/astar.s: src/astar.cpp.s
+.PHONY : src/astar.s
 
 # target to generate assembly for a file
-src/a-star.cpp.s:
-	$(MAKE) -f CMakeFiles/a-star.dir/build.make CMakeFiles/a-star.dir/src/a-star.cpp.s
-.PHONY : src/a-star.cpp.s
+src/astar.cpp.s:
+	$(MAKE) -f CMakeFiles/astar.dir/build.make CMakeFiles/astar.dir/src/astar.cpp.s
+.PHONY : src/astar.cpp.s
 
 # Help Target
 help:
@@ -138,12 +138,12 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... a-star"
+	@echo "... astar"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... src/a-star.o"
-	@echo "... src/a-star.i"
-	@echo "... src/a-star.s"
+	@echo "... src/astar.o"
+	@echo "... src/astar.i"
+	@echo "... src/astar.s"
 .PHONY : help
 
 

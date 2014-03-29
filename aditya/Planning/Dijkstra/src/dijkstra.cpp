@@ -7,10 +7,10 @@ typedef vector<int> vi;
 typedef pair<int,int> ii;
 typedef vector<ii> vii;
 typedef vector<vii> vvii;
- 
+
 const int MAX = 1001;
 const int MAXINT = 1000000000;
- 
+
 int n;
 vvii G(MAX);
 vi D(MAX, MAXINT);
