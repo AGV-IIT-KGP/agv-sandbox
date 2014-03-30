@@ -15,9 +15,9 @@ using namespace std;
 
 int dx[]={1, 1, 0, -1, -1, -1, 0, 1};
 int dy[]={0, 1, 1, 1, 0, -1, -1, -1};
-int cost[]={10, 14, 10, 14, 10, 14, 10, 14};
+int cost[]={10, 20, 10, 20, 10, 20, 10, 20};
 int s_x,s_y,d_x,d_y;
-cv::Mat img;
+cv::Mat img(DIMENSION,DIMENSION,CV_8UC1,cvScalarAll(255));
 
 class vertex
 {
@@ -31,6 +31,7 @@ public:
 		y=ycoord;
 		parent=NULL;
 		h=fabs(x-d_x)*10+fabs(y-d_y)*10;
+		//h=(sqrt((x-d_x)*(x-d_x)+(y-d_y)*(y-d_y)))*10;
 		obstruction=(img<50?1:0);
 	}
 	int get_f()
@@ -61,6 +62,17 @@ void create_map(vertex ***map)
     		map[i][j]= new vertex(i,j,img.at<uchar>(i,j));
     	}
     }
+}
+
+void delete_map(vertex ***map)
+{
+    for(int i=0;i<DIMENSION;i++){
+    	for(int j=0; j<img.cols; ++j){
+    		delete map[i][j];
+    	}
+    	delete map[i];
+    }
+    delete map;
 }
 
 void path(vertex*** map)
@@ -118,8 +130,12 @@ void ASTAR(vertex*** map, int state[DIMENSION][DIMENSION])
 
 int main()
 {
-    img=cv::imread("./image.jpg",1);
-    //cout<<img.rows<<img.cols;
+    //img=cv::imread("./image.jpg",1);
+    cv::circle(img, cv::Point(100, 125), 32, 0, -1, CV_AA);
+    cv::circle(img, cv::Point(299, 256), 60, 0, -1, CV_AA);
+    cv::circle(img, cv::Point(155, 240), 32, 0, -1, CV_AA);
+    cv::imshow("window",img);
+    cv::waitKey(0);
     cout<<"Enter source pixel"<<endl;
     cin>>s_x>>s_y;
     cout<<"Enter destination pixel"<<endl;
@@ -132,11 +148,11 @@ int main()
     }
     vertex ***map = new vertex**[DIMENSION];;
     create_map(map);
-    cv::imshow("window",img);
-    cv::waitKey(0);
+    
     //cv::destroyAllWindows();
   	ASTAR(map,state);
     cv::imshow("window",img);
     cv::waitKey(0);
+    delete_map(map);
     return 0;
 }
