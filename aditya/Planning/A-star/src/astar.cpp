@@ -25,20 +25,20 @@ public:
 	int x,y,obstruction;
 	int g,h;
 	vertex* parent;
-	vertex(int xcoord, int ycoord, uchar img)
+	inline vertex(int xcoord, int ycoord, uchar img)
 	{
 		x=xcoord;
 		y=ycoord;
 		parent=NULL;
 		h=fabs(x-d_x)*10+fabs(y-d_y)*10;
-		//h=(sqrt((x-d_x)*(x-d_x)+(y-d_y)*(y-d_y)))*10;
+		//h=(sqrt7((x-d_x)*(x-d_x)+(y-d_y)*(y-d_y)))*10;
 		obstruction=(img<50?1:0);
 	}
-	int get_f()
+	inline int get_f()
 	{
 		return g+h;
 	}
-	void set_parent(vertex *p)
+	inline void set_parent(vertex *p)
 	{
 		parent=p;
 	}
@@ -47,14 +47,14 @@ public:
 class Compare
 {
 public:
-    bool operator() (vertex* &lhs, vertex* &rhs)
+    inline bool operator() (vertex* &lhs, vertex* &rhs)
     {
         if(lhs->get_f()>rhs->get_f()) return true;
         return false;
     }
 };
 
-void create_map(vertex ***map)
+inline void create_map(vertex ***map)
 {
     for(int i=0;i<DIMENSION;i++){
     	map[i] = new vertex*[DIMENSION];
@@ -64,7 +64,7 @@ void create_map(vertex ***map)
     }
 }
 
-void delete_map(vertex ***map)
+inline void delete_map(vertex ***map)
 {
     for(int i=0;i<DIMENSION;i++){
     	for(int j=0; j<img.cols; ++j){
@@ -75,16 +75,16 @@ void delete_map(vertex ***map)
     delete map;
 }
 
-void path(vertex*** map)
+inline void path(vertex*** map,cv::Mat* image)
 {
 	vertex* next= map[d_x][d_y]->parent;
 	while(next->x!=s_x && next->y!=s_y){
-		img.at<uchar>(next->x,next->y)=150;
+		image->at<uchar>(next->x,next->y)=150;
 		next=next->parent;
 	}	
 }
 
-void ASTAR(vertex*** map, int state[DIMENSION][DIMENSION])
+inline void ASTAR(vertex*** map, int state[DIMENSION][DIMENSION])
 {
 	clock_t begin = clock();
     priority_queue<vertex*, vector<vertex*>, Compare> Q;
@@ -96,12 +96,9 @@ void ASTAR(vertex*** map, int state[DIMENSION][DIMENSION])
     {
         vertex* t = Q.top();
         Q.pop();
-        //cout<<t->x<<t->y;
         if(t->x==d_x && t->y==d_y){
-        	//cout<<"Found"<<t->x<<t->y;
         	clock_t end = clock();
   			cout<<double(end - begin) / CLOCKS_PER_SEC<<" seconds\n";
-        	path(map);
             return;
         }
         state[t->x][t->y]=CLOSE;
@@ -128,18 +125,46 @@ void ASTAR(vertex*** map, int state[DIMENSION][DIMENSION])
 	}
 }
 
+cv::Mat distance_transform(cv::Mat orig)
+{
+	/*cv::imshow("window",orig);
+	cv::waitKey(0);*/
+	cv::distanceTransform(orig, orig, CV_DIST_L1, 3);
+	normalize(orig, orig, 0, 255, cv::NORM_MINMAX, CV_8UC1);
+	/*cv::imshow("window",orig);
+	cv::waitKey(0);*/
+	for(int i=0; i<DIMENSION; ++i){
+		for(int j=0; j<DIMENSION; ++j){
+			if(orig.at<uchar>(i,j)<22)
+				orig.at<uchar>(i,j)=255;
+			else
+				orig.at<uchar>(i,j)=0;
+		}
+	}
+	orig=255-orig;
+	/*cv::imshow("window",orig);
+	cv::waitKey(0);
+	*/
+	return orig;
+}
+
 int main()
 {
-    //img=cv::imread("./image.jpg",1);
     cv::circle(img, cv::Point(100, 125), 32, 0, -1, CV_AA);
     cv::circle(img, cv::Point(299, 256), 60, 0, -1, CV_AA);
     cv::circle(img, cv::Point(155, 240), 32, 0, -1, CV_AA);
     cv::imshow("window",img);
-    cv::waitKey(0);
+    cv::waitKey(70);
+    cv::Mat orig=img.clone();
+    img=distance_transform(orig);
     cout<<"Enter source pixel"<<endl;
     cin>>s_x>>s_y;
     cout<<"Enter destination pixel"<<endl;
     cin>>d_x>>d_y;
+    if(img.at<uchar>(s_x,s_y)<50 || img.at<uchar>(d_x,d_y)<50){
+    	cout<<"Wrong input. Point in obstruction area\n";
+    	return 0;
+    }
     int state[DIMENSION][DIMENSION];	//0-none,1-open,2-close
     for(int i=0;i<DIMENSION;i++){
     	for(int j=0; j<DIMENSION; ++j){
@@ -148,10 +173,9 @@ int main()
     }
     vertex ***map = new vertex**[DIMENSION];;
     create_map(map);
-    
-    //cv::destroyAllWindows();
   	ASTAR(map,state);
-    cv::imshow("window",img);
+  	path(map,&orig);
+    cv::imshow("window",orig);
     cv::waitKey(0);
     delete_map(map);
     return 0;
