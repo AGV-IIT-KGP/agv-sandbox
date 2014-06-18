@@ -1,0 +1,15 @@
+<package>
+  <description brief="OOPs_PS">
+
+     OOPs_PS
+
+  </description>
+  <author>Abinash Meher</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/OOPs_PS</url>
+  <depend package="opencv2"/>
+
+</package>
+
+
